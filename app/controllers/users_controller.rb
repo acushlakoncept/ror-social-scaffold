@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
     @posts = @user.posts.ordered_by_most_recent
 
+    @pending = @user.pending_friends
+
   end
 
 end

@@ -6,4 +6,12 @@
       <%= render @posts %>
     </ul>
   </article>
+  <article class="timeline">
+    <h3>Pending Invitations:</h3>
+    <ul class="posts">
+      <% @pending.each do |invitation|%>
+        <li><%= invitation.name %> </li>
+      <% end %>
+    </ul>
+  </article>
 </section>
