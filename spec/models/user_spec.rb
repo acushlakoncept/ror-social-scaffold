@@ -15,4 +15,25 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+
+  context 'helper methods test' do
+    before(:each) do
+      @user1 = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
+      @user2 = User.create(name: 'User2', email: 'user2@gmail.com', password: 'password')
+      @user3 = User.create(name: 'User3', email: 'user3@gmail.com', password: 'password')
+      @user4 = User.create(name: 'User4', email: 'user4@gmail.com', password: 'password')
+    end
+
+    it 'should return empty friends' do
+      expect(User.first.friends.empty?).to eq(true)
+    end
+
+    it 'should return on pending friend request' do
+      User.first.friendships.new(friend_id: @user2.id, status: false).save
+      expect(@user2.friend_requests.length).to eq(1)
+    end
+
+  end
+
 end
