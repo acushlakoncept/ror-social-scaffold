@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
     def create
-        @friendship = current_user.friendships.new(friend_id: params[:user_id])
+        @friendship = current_user.friendships.new(friend_id: params[:user_id], status: false)
     
         if @friendship.save
           redirect_to users_path, notice: 'You sent a new invite.'
