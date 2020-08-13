@@ -4,12 +4,16 @@ module UsersHelper
 
         return if current_user.friend?(obj)
 
+        out = ''
         if current_user.pending_friends.include?(obj)
-            link_to('pending invite', '#')
+            out << link_to('pending invite', '#')
         elsif current_user.friend_requests.include?(obj)
-            link_to('Accept', invite_path(user_id: obj.id), method: :put)
+            out << link_to('Accept', invite_path(user_id: obj.id), method: :put)
+            out << link_to('Reject', reject_path(user_id: obj.id), method: :delete)
         else
-            link_to('Invite', invite_path(user_id: obj.id), method: :post)
+            out << link_to('Invite', invite_path(user_id: obj.id), method: :post)
         end
+
+        out.html_safe
     end
 end

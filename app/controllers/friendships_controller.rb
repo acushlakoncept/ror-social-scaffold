@@ -8,4 +8,6 @@ class FriendshipsController < ApplicationController
           redirect_to users_path, alert: 'woohps something went wrong with the invite.'
         end
     end
+
+
 end
