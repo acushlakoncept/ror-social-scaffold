@@ -19,11 +19,11 @@ class User < ApplicationRecord
   end
 
   def pending_friends
-    friendships.map{|friendship| friendship.friend if !friendship.status}.compact
+    friendships.map{|friendship| friendship.friend if !friendship.status || friendship.nil?}.compact
   end
 
   def friend_requests
-    inverse_friendships.map{|friendship| friendship.user if !friendship.status}.compact
+    inverse_friendships.map{|friendship| friendship.user if !friendship.status || friendship.nil?}.compact
   end
 
   def confirm_friend(user)
