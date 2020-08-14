@@ -39,5 +39,9 @@ RSpec.describe User, type: :model do
       User.first.friendships.new(friend_id: @user2.id, status: false).save
       expect(@user2.friend_requests.length).to eq(1)
     end
+    it 'should return one pending friend request' do
+      User.first.friendships.new(friend_id: @user2.id, status: false).save
+      expect(@user1.pending_friends.length).to eq(3)
+    end
   end
 end
