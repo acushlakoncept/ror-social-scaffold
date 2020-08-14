@@ -7,6 +7,11 @@ RSpec.describe Post, type: :model do
       expect(post1.save).to eq(false)
     end
 
+    it 'ensures maximum content is not more than 1000' do
+      post1 = Post.new(content: 'Test content' * 1000, user_id: 1)
+      expect(post1.save).to eq(false)
+    end
+
     it 'should save successfully' do
       post1 = Post.new(content: 'Test content', user_id: 1).save
       expect(post1) == true
