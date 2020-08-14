@@ -56,5 +56,11 @@ RSpec.describe User, type: :model do
       @user4.reject_request(@user3)
       expect(@user3.friendships.size).to eq(0)
     end
+
+    it 'should affirm another user as a friend' do
+      @user3.friendships.new(friend_id: @user4.id, status: false).save
+      @user4.confirm_friend(@user3)
+      expect(@user3.friend?(@user4)).to eq(true)
+    end
   end
 end
