@@ -7,6 +7,16 @@ RSpec.describe User, type: :model do
       expect(user).to eq(false)
     end
 
+    it 'ensures minimum length for name to be 3' do
+      user = User.new(name: 'Us', email: 'user@gmail.com', password: 'password').save
+      expect(user).to eq(false)
+    end
+
+    it 'ensures max length for name to be 3' do
+      user = User.new(name: 'Uduak Essien Somoye Ayotunde', email: 'user@gmail.com', password: 'password').save
+      expect(user).to eq(false)
+    end
+
     it 'should save successfully' do
       user = User.new(name: 'User1', email: 'user@gmail.com', password: 'password').save
       expect(user) == true
