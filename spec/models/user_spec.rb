@@ -35,13 +35,26 @@ RSpec.describe User, type: :model do
       expect(User.first.friends.empty?).to eq(true)
     end
 
-    it 'should return one pending friend request' do
+    it 'should return one incoming friend request' do
       User.first.friendships.new(friend_id: @user2.id, status: false).save
       expect(@user2.friend_requests.length).to eq(1)
     end
+
     it 'should return one pending friend request' do
       User.first.friendships.new(friend_id: @user2.id, status: false).save
-      expect(@user1.pending_friends.length).to eq(3)
+      expect(@user1.pending_friends.length).to eq(1)
+    end
+
+    it 'should confirm the incoming friend request' do
+      User.first.friendships.new(friend_id: @user2.id, status: false).save
+      @user2.confirm_friend(@user1)
+      expect(@user1.friendships.first.status).to eq(true)
+    end
+
+    it 'should reject the incoming friend request' do
+      @user3.friendships.new(friend_id: @user4.id, status: false).save
+      @user4.reject_request(@user3)
+      expect(@user3.friendships.size).to eq(0)
     end
   end
 end
