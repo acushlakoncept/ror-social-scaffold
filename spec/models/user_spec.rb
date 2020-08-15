@@ -27,8 +27,6 @@ RSpec.describe User, type: :model do
     before(:each) do
       @user1 = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
       @user2 = User.create(name: 'User2', email: 'user2@gmail.com', password: 'password')
-      @user3 = User.create(name: 'User3', email: 'user3@gmail.com', password: 'password')
-      @user4 = User.create(name: 'User4', email: 'user4@gmail.com', password: 'password')
     end
 
     it 'should return empty friends' do
@@ -52,15 +50,15 @@ RSpec.describe User, type: :model do
     end
 
     it 'should reject the incoming friend request' do
-      @user3.friendships.new(friend_id: @user4.id, status: false).save
-      @user4.reject_request(@user3)
-      expect(@user3.friendships.size).to eq(0)
+      @user1.friendships.new(friend_id: @user2.id, status: false).save
+      @user2.reject_request(@user1)
+      expect(@user1.friendships.size).to eq(0)
     end
 
     it 'should affirm another user as a friend' do
-      @user3.friendships.new(friend_id: @user4.id, status: false).save
-      @user4.confirm_friend(@user3)
-      expect(@user3.friend?(@user4)).to eq(true)
+      @user1.friendships.new(friend_id: @user2.id, status: false).save
+      @user2.confirm_friend(@user1)
+      expect(@user1.friend?(@user2)).to eq(true)
     end
   end
 end
