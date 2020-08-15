@@ -9,7 +9,7 @@ RSpec.describe "Users", type: :request do
         assert_response :redirect
     end
 
-    it 'should login' do
+    it 'should successfully authenticate user' do
         @user = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
         sign_in @user
         get users_path
