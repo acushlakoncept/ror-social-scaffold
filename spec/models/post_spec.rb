@@ -2,14 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   context 'validation test' do
-    it 'ensures content of post is present' do
-      post1 = Post.new(user_id: 1)
-      expect(post1.save).to eq(false)
-    end
+    
+    it { should validate_presence_of(:content) }
 
-    it 'ensures maximum content is not more than 1000' do
-      post1 = Post.new(content: 'Test content' * 1000, user_id: 1)
-      expect(post1.save).to eq(false)
+    it do
+      should validate_length_of(:content).
+        is_at_most(1000).
+        with_message("1000 characters in post is the maximum allowed.")
     end
 
     it 'should save successfully' do
