@@ -9,16 +9,9 @@ RSpec.describe 'Users', type: :request do
   end
 
   it do
-      get root_path
-      should redirect_to(new_user_session_path) 
-  end 
-
-#   it 'should successfully authenticate user' do
-#     @user = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
-#     sign_in @user
-#     get users_path
-#     assert_response :success
-#   end
+    get root_path
+    should redirect_to(new_user_session_path)
+  end
 
   describe 'Authenticated User Activities' do
     before do
@@ -27,14 +20,13 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'Access users #index page successfully' do
-        get users_path
-        assert_response :success
+      get users_path
+      assert_response :success
     end
 
     it do
-        get user_path(@user)
-        should render_template('show')
-    end 
-
+      get user_path(@user)
+      should render_template('show')
+    end
   end
 end
