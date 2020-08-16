@@ -31,5 +31,10 @@ RSpec.describe 'Users', type: :request do
         assert_response :success
     end
 
+    it do
+        get user_path(@user)
+        should render_template('show')
+    end 
+
   end
 end
