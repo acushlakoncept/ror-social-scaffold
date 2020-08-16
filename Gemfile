@@ -41,10 +41,13 @@ gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rspec'
+  gem 'shoulda-matchers', '4.0.0.rc1'
 end
 
 group :development do
@@ -58,5 +61,6 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'hirb'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
