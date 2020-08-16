@@ -18,7 +18,7 @@
     <h3>Incoming Invitations:</h3>
     <ul class="posts">
       <% @incoming.each do |invitation|%>
-          <li><%= invitation.name %> <%= link_to('Accept', invite_path(user_id: invitation.id), method: :put) %></li>
+          <li><%= invitation.name %> <%= invite_or_pending_btn(invitation) %></li>
       <% end %>
     </ul>
   </article>
