@@ -8,10 +8,28 @@ RSpec.describe 'Users', type: :request do
     assert_response :redirect
   end
 
-  it 'should successfully authenticate user' do
-    @user = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
-    sign_in @user
-    get users_path
-    assert_response :success
+  it do
+      get root_path
+      should redirect_to(new_user_session_path) 
+  end 
+
+#   it 'should successfully authenticate user' do
+#     @user = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
+#     sign_in @user
+#     get users_path
+#     assert_response :success
+#   end
+
+  describe 'Authenticated User Activities' do
+    before do
+      @user = User.create(name: 'User1', email: 'user1@gmail.com', password: 'password')
+      sign_in @user
+    end
+
+    it 'Access users #index page successfully' do
+        get users_path
+        assert_response :success
+    end
+
   end
 end
