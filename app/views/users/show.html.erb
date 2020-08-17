@@ -22,4 +22,12 @@
       <% end %>
     </ul>
   </article>
+  <article class="timeline">
+    <h3>Mutual Friends:</h3>
+    <ul class="posts">
+      <% @mutual_friends.each do |mutual|%>
+          <li><%= mutual.name %></li>
+      <% end %>
+    </ul>
+  </article>
 </section>
