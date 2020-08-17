@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
     @pending = @user.pending_friends
     @incoming = @user.friend_requests
+    @mutual_friends = current_user.mutual_friends(@user)
   end
 
   def update
