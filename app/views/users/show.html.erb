@@ -1,5 +1,5 @@
 <section class="user-section">
-  <h2><%= "Name: #{@user.name}" %></h2>
+  <h2><%= "Name: #{@user.name}" %> <small><em><%= invite_or_pending_btn(@user) %></em></small></h2>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
@@ -18,7 +18,7 @@
     <h3>Incoming Invitations:</h3>
     <ul class="posts">
       <% @incoming.each do |invitation|%>
-          <li><%= invitation.name %> <%= link_to('Accept', invite_path(user_id: invitation.id), method: :put) %></li>
+          <li><%= invitation.name %> <%= invite_or_pending_btn(invitation) %></li>
       <% end %>
     </ul>
   </article>
