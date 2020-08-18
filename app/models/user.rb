@@ -11,20 +11,27 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :confirmed_friendships, -> { where status: true }, class_name: "Friendship"
+  has_many :friends, through: :confirmed_friendships
+  has_many :pending_friendships, -> { where status: false }, class_name: "Friendship", foreign_key: "user_id"
+  has_many :pending_friends, through: :pending_friendships, source: :friend
 
-  def friends
-    friends_array = friendships.map { |friendship| friendship.friend if friendship.status } +
-                    inverse_friendships.map { |friendship| friendship.user if friendship.status }
-    friends_array.compact
-  end
+  has_many :inverted_friendships, -> { where confirmed: false }, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :friend_requests, through: :inverted_friendships
 
-  def pending_friends
-    friendships.map { |friendship| friendship.friend if !friendship.status || friendship.nil? }.compact
-  end
+  # def friends
+  #   friends_array = friendships.map { |friendship| friendship.friend if friendship.status } +
+  #                   inverse_friendships.map { |friendship| friendship.user if friendship.status }
+  #   friends_array.compact
+  # end
 
-  def friend_requests
-    inverse_friendships.map { |friendship| friendship.user if !friendship.status || friendship.nil? }.compact
-  end
+  # def pending_friends
+  #   friendships.map { |friendship| friendship.friend if !friendship.status || friendship.nil? }.compact
+  # end
+
+  # def friend_requests
+  #   inverse_friendships.map { |friendship| friendship.user if !friendship.status || friendship.nil? }.compact
+  # end
 
   # def confirm_friend(user)
   #   friendship = inverse_friendships.find { |f| f.user == user }
@@ -38,6 +45,8 @@ class User < ApplicationRecord
                     user_id: self.friend_id,
                     status: true)
   end
+
+  
 
   def reject_request(user)
     friendship = inverse_friendships.find { |f| f.user == user }
