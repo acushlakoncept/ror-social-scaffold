@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    friends.include?(user)
+    self.friends.include?(user)
   end
 
   def mutual_friends(user)
@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def friends_ids
-    f_ids = friends.map(&:id)
+    f_ids = self.friends.map(&:id)
     f_ids << id
   end
 end
