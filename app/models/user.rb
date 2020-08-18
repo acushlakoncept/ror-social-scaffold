@@ -12,24 +12,24 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
-  def friends
-    friends_array = friendships.map { |friendship| friendship.friend if friendship.status } +
-                    inverse_friendships.map { |friendship| friendship.user if friendship.status }
-    friends_array.compact
-  end
+  has_many :confirmed_friendships, -> { where status: true }, class_name: 'Friendship'
+  has_many :friends, through: :confirmed_friendships
 
-  def pending_friends
-    friendships.map { |friendship| friendship.friend if !friendship.status || friendship.nil? }.compact
-  end
+  has_many :pending_friendships, -> { where status: false }, class_name: 'Friendship', foreign_key: 'user_id'
+  has_many :pending_friends, through: :pending_friendships, source: :friend
 
-  def friend_requests
-    inverse_friendships.map { |friendship| friendship.user if !friendship.status || friendship.nil? }.compact
-  end
+  has_many :inverted_friendships, -> { where status: false }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :friend_requests, through: :inverted_friendships, source: :user
 
   def confirm_friend(user)
-    friendship = inverse_friendships.find { |f| f.user == user }
-    friendship.status = true
-    friendship.save
+    friend = Friendship.find_by(user_id: user.id, friend_id: id)
+    friend.status = true
+    friend.save
+    Friendship.create!(friend_id: user.id, user_id: id, status: true)
+  end
+
+  def friends_and_own_posts
+    Post.where(user_id: friends_ids)
   end
 
   def reject_request(user)
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def mutual_friends(user)
-    friends & user.friends
+    self.friends & user.friends
   end
 
   def friends_ids
