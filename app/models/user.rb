@@ -41,11 +41,11 @@ class User < ApplicationRecord
   #   friendship.save
   # end
 
-  def confirm_friend
-    self.update_attributes(status: true)
-    Friendship.create!(friend_id: self.user_id,
-                    user_id: self.friend_id,
-                    status: true)
+  def confirm_friend(user)
+    friend = Friendship.find_by(user_id: user.id, friend_id: self.id)
+    friend.status = true
+    friend.save
+    Friendship.create!(friend_id: user.id, user_id: self.id, status: true)
   end
 
   def friends_and_own_posts
