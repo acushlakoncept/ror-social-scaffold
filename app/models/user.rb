@@ -21,25 +21,6 @@ class User < ApplicationRecord
   has_many :inverted_friendships, -> { where status: false }, class_name: "Friendship", foreign_key: "friend_id"
   has_many :friend_requests, through: :inverted_friendships, source: :user
 
-  # def friends
-  #   friends_array = friendships.map { |friendship| friendship.friend if friendship.status } +
-  #                   inverse_friendships.map { |friendship| friendship.user if friendship.status }
-  #   friends_array.compact
-  # end
-
-  # def pending_friends
-  #   friendships.map { |friendship| friendship.friend if !friendship.status || friendship.nil? }.compact
-  # end
-
-  # def friend_requests
-  #   inverse_friendships.map { |friendship| friendship.user if !friendship.status || friendship.nil? }.compact
-  # end
-
-  # def confirm_friend(user)
-  #   friendship = inverse_friendships.find { |f| f.user == user }
-  #   friendship.status = true
-  #   friendship.save
-  # end
 
   def confirm_friend(user)
     friend = Friendship.find_by(user_id: user.id, friend_id: self.id)
@@ -49,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def friends_and_own_posts
-    Post.where('user_id IN (?)', friends_ids)
+    Post.where(user_id: friends_ids)
   end
 
   def reject_request(user)
