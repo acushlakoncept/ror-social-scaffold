@@ -29,7 +29,7 @@ RSpec.describe 'Users', type: :request do
       should render_template('show')
     end
 
-    it "assigns all users to @users" do
+    it 'assigns all users to @users' do
       get users_path
       expect(assigns(:users)).to eq(User.all)
     end
