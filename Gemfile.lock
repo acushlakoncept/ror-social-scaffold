@@ -249,7 +249,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
-  capybara (~> 2.7, >= 2.7.1)
+  capybara
   coffee-rails (~> 4.2)
   devise
   hirb
