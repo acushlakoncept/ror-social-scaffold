@@ -16,7 +16,7 @@ Some of the advanced concepts explored in this project includes.
 
 ## Live Demo
 
-TBA
+[Live Demo](https://ror-social.herokuapp.com/)
 
 
 ## Getting Started
