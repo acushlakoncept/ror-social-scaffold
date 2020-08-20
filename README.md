@@ -1,6 +1,10 @@
 # Scaffold for social media app with Ruby on Rails
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+> In this project we developed a full flesh social media application from modelling the entity relationship diagram (ERD) to building the needed ActiveRecords.
+
+Some of the advanced concepts explored in this project includes.
+- Working with advanced associations, many-to-many relationships.
+- Using RSpec testing using shoulda-matchers and capybara
 
 ![screenshot](./ror-social.gif)
 
@@ -8,6 +12,7 @@
 
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
+- RSpec
 
 ## Live Demo
 
@@ -26,7 +31,12 @@ Postgres: >=9.5
 
 ### Setup
 
-Instal gems with:
+~~~bash
+$ git clone https://github.com/acushlakoncept/ror-social-scaffold.git
+$ cd ror-social-scaffold
+~~~
+
+Install gems with:
 
 ```
 bundle install
@@ -34,12 +44,12 @@ bundle install
 
 Setup database with:
 
+> make sure you have postgress sql installed and running on your system
+
 ```
    rails db:create
    rails db:migrate
 ```
-
-
 
 ### Usage
 
@@ -54,18 +64,25 @@ Open `http://localhost:3000/` in your browser.
 ### Run tests
 
 ```
-    rpsec --format documentation
+    rpsec 
 ```
 
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
+# Authors
 
-### Deployment
+👤 **Somoye**
 
-TBA
+- Github:[@somoye123](https://github.com/somoye123)
+- Twitter:[@ayotunde_197](https://twitter.com/ayotunde_197)
+- LinkedIn:[Somoye Ayotunde](https://www.linkedin.com/in/somoye-ayotunde-03a471161)
 
-## Authors
 
-TBA
+👤 **Uduak Essien**
+
+- Github: [@acushlakoncept](https://github.com/acushlakoncept/)
+- Twitter: [@acushlakoncept](https://twitter.com/acushlakoncept)
+- Linkedin: [acushlakoncept](https://www.linkedin.com/in/acushlakoncept/)
+
+
 
 ## 🤝 Contributing
 
@@ -79,9 +96,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
+- Microverse TSE members who reviewed and gave us positive feedbacks and guidance.
+- Microverse
 
-## 📝 License
-
-TBA
 
