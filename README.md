@@ -32,6 +32,7 @@ Postgres: >=9.5
 ### Setup
 
 ~~~bash
+
 $ git clone https://github.com/acushlakoncept/ror-social-scaffold.git
 $ cd ror-social-scaffold
 ~~~
