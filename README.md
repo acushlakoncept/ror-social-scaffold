@@ -1,6 +1,6 @@
 # Social Media App with Ruby on Rails
 
-> In this project we developed a full flesh social media application from modelling the entity relationship diagram (ERD) to building the needed ActiveRecords.
+> In this pwe developed a fully fleshed out social media application from modelling the entity relationship diagram (ERD) to building the needed ActiveRecords.
 
 Some of the advanced concepts explored in this project includes.
 - Working with advanced associations, many-to-many relationships.
